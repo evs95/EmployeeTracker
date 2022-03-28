@@ -53,7 +53,7 @@ const AddEmployee = async (data) =>{
 
 const UpdateEmployee = async (data) =>{
   const {id,role_id} = data;
-  const params = [id,role_id];
+  const params = [role_id,id];
   const db = await CreateMySqlConnection();
   const sql = 'UPDATE employee SET role_id = (?) WHERE ID = (?)';
   const [rows, fields] = await db.execute(sql,params);

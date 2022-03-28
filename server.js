@@ -121,6 +121,7 @@ askQuestions = ()=>{
         const emps = await GetEmployees();
         let r = roles.map(r=>r['Job Title']);
         let e = emps.map(r=>`${r['First Name']} ${r['Last Name']}`);
+        e.push('none')
         inquirer
             .prompt([{
                 type: 'input',
@@ -233,7 +234,10 @@ askQuestions = ()=>{
      const manager = emps.filter((element) => `${element['First Name']} ${element['Last Name']}` == managername );
 
       let newEmp = {
-        first_name:first_name,last_name : last_name,role_id:role[0]['Role id'],manager_id:manager[0]['Employee id']
+        first_name:first_name,
+        last_name : last_name,
+        role_id:role[0]['Role id'],
+        manager_id: managername == 'none'? null: manager[0]['Employee id']
       };
 
      let res = await AddEmployee(newEmp);
